@@ -1,0 +1,169 @@
+@import './theme.less';/*引入配置*/
+/*
+ * 重置mint-ui 样式
+ */
+
+.mint-datetime {
+    overflow: hidden;
+
+    border-radius: 20px 20px 0 0;
+
+    .picker-toolbar {
+        border-bottom: none;
+        height: auto;
+
+        font-size: 32px;
+        text-align: center;
+
+        color: #333;
+
+        span {
+            display: inline-block;
+
+            height: 92px;
+
+            font-size: .375rem;
+            line-height: 92px;
+
+            color: #919191;
+        }
+    }
+
+    .picker-items {
+        display: flex;
+
+        position: relative;
+
+        margin: 0 auto;
+        padding: 30px 0;
+        width: 90%;
+
+        text-align: center;
+
+        -webkit-mask-box-image: linear-gradient(to top, transparent, transparent 5%, white 20%, white 80%, transparent 95%, transparent);
+    }
+
+    .picker-item {
+        height: 70px;
+
+        font-size: 30px;
+        line-height: 70px;
+
+        color: #999;
+    }
+
+    .picker-selected {
+        overflow: hidden;
+
+        font-size: 32px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+        color: #575757;
+    }
+}
+
+
+.mint-toast {
+    border-radius: 5PX;
+    padding: 42px !important;
+
+    font-size: 15PX;
+    white-space: nowrap;
+}
+
+.mint-toast-text {
+    font-size: 15PX;
+}
+
+.mint-msgbox {
+    overflow: hidden;
+
+    border-radius: .12rem;
+    width: 7.2rem;
+
+    background-color: #fff;
+}
+
+.mint-msgbox-content {
+    border: 0;
+    padding: .8rem .8rem .64rem;
+
+    font-size: .453333rem;
+
+    color: #666;
+}
+
+.mint-msgbox-message {
+    line-height: 1.4;
+
+    color: #666;
+}
+
+.mint-msgbox-btns {
+    border: 0;
+    height: 90px;
+
+    line-height: 90px;
+}
+
+.mint-msgbox-cancel, .mint-msgbox-confirm {
+    border: 1PX solid #d2d2d2;
+
+    font-size: .48rem;
+
+    .font_color();
+    background-color: #fff;
+}
+
+.mint-msgbox-cancel {
+    border-right: 0;
+}
+
+.v-modal {
+    opacity: .4;
+}
+
+.mint-msgbox {
+    overflow: hidden;
+
+    border-radius: .12rem;
+    width: 7.2rem;
+
+    background-color: #fff;
+}
+
+.mint-msgbox-content {
+    border: 0;
+    padding: .8rem .8rem .64rem;
+
+    font-size: .453333rem;
+
+    color: #666;
+}
+
+.mint-msgbox-message {
+    line-height: 1.4;
+
+    color: #666;
+}
+
+.mint-msgbox-btns {
+    border: 0;
+    height: 90px;
+
+    line-height: 90px;
+}
+
+.mint-msgbox-cancel, .mint-msgbox-confirm {
+    border: 1PX solid #d2d2d2;
+
+    font-size: .48rem;
+
+    .font_color();
+    background-color: #fff;
+}
+
+.mint-msgbox-cancel {
+    border-right: 0;
+}

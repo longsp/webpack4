@@ -1,0 +1,235 @@
+@import './theme.less';/*引入配置*/
+
+html, body, ul, li, ol, dl, dd, dt, p, h1, h2, h3, h4, h5, h6, form, fieldset, legend, img {
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+
+    font-weight: normal;
+}
+
+fieldset, img {
+    border: none;
+}
+
+em, i {
+    font-style: normal;
+}
+
+img {
+    display: block;
+}
+
+h1 {
+    font-weight: normal;
+}
+
+address, caption, cite, code, dfn, th, var {
+    font-weight: normal;
+    font-style: normal;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+input {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+input::-moz-focus-inner {
+    border: none;
+    padding: 0;
+}
+
+select, input {
+    vertical-align: middle;
+}
+
+select, input, textarea {
+    margin: 0;
+}
+
+input[type='text'], input[type='password'], textarea {
+    outline-style: none;
+
+    -webkit-appearance: none;
+}
+
+textarea {
+    resize: none;
+}
+
+input, textarea {
+    border: none;
+
+    background: none;
+}
+
+a {
+    text-decoration: none;
+
+    outline: none;
+}
+
+a:active {
+    outline: none;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+
+    background-color: #f6f6f6;
+}
+
+body {
+    font-family: 'PingFang SC', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+    font-family: '-apple-system', 'Helvetica Neue', 'Roboto', 'Segoe UI', 'microsoft yahei', sans-serif;
+    font-size: 26px;
+    line-height: 1;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+input {
+    border: none;
+
+    outline: none;
+}
+
+button {
+    display: flex;
+
+    border: 0;
+    padding: 0;
+
+    background-color: inherit;
+
+    outline: none;
+
+    align-items: center;
+    justify-content: center;
+}
+
+button:focus {
+    outline: none;
+}
+
+/**文字选中--样式修改**/
+/* ::selection {
+  background: #fd7b0f;
+  color: #fff;
+}
+::-moz-selection {
+  background: #fd7b0f;
+  color: #fff;
+} */
+
+/**去掉chrome输入框填充时黄色背景**/
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px white inset;
+}
+
+/**placeholder样式**/
+input::-webkit-input-placeholder {
+    color: #c7cdd4;
+}
+
+input:-ms-input-placeholder {
+    color: #c7cdd4;
+}
+
+/**弹性盒子**/
+.flex {
+    display: flex;
+}
+
+.flex-mid {
+    display: flex;
+
+    align-items: center;
+}
+
+.flex-center {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-between {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* 清除浮动 */
+.clearfix::after {
+    display: block;
+    clear: both;
+    overflow: hidden;
+
+    height: 0;
+
+    font-size: 0;
+
+    content: '.';
+}
+
+.clearfix {
+    zoom: 1;
+}
+
+// 横向居中
+.left-center {
+    position: absolute;
+    left: 50%;
+
+    -webkit-transform: translateX(-50%);
+       -moz-transform: translateX(-50%);
+         -o-transform: translateX(-50%);
+            transform: translateX(-50%);
+}
+
+// 垂直居中
+.top-center {
+    position: absolute;
+    top: 50%;
+
+    -webkit-transform: translateY(-50%);
+       -moz-transform: translateY(-50%);
+         -o-transform: translateY(-50%);
+            transform: translateY(-50%);
+}
+
+
+/**/
+.common-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 690px;
+    height: 88px;
+    .bg_color();
+    border-radius: 6px;
+    font-size: 36px;
+    border: 0;
+    color: #fff;
+    margin: 48px auto;
+}
+.common-btn:disabled{
+    background-color: #c7cdd4 !important;
+}
+button:disabled{
+    background-color: #c7cdd4 !important;
+}
