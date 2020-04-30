@@ -197,7 +197,7 @@ module.exports = {
   而 plugin, 关注的不是文件的格式，而是在编译的各个阶段，会触发不同的事件，让你可以干预每个编译阶段。
   */
   plugins: [
-    // 环境变量
+    // 环境变量, 可以在src内引用
     new webpack.DefinePlugin({
       DEBUG: dev,
       VERSION: JSON.stringify(pkgInfo.version),
@@ -262,37 +262,32 @@ if (dev) {
   并且带有热更新的功能，打代码时保存一下文件，浏览器会自动刷新。比 nginx 方便很多
   如果是修改 css, 甚至不需要刷新页面，直接生效。这让像弹框这种需要点击交互后才会出来的东西调试起来方便很多。
 
-  因为 webpack-cli 无法正确识别 serve 选项，使用 webpack-cli 执行打包时会报错。
-  因此我们在这里判断一下，仅当使用 webpack-serve 时插入 serve 选项。
-  issue：https://github.com/webpack-contrib/webpack-serve/issues/19
+  配置项说明:  https://webpack.js.org/configuration/dev-server/#devserver
   */
-  module.exports.serve = {
-    host: '0.0.0.0',
-    hot: {
-      host: {
-        client: internalIp.v4.sync(),  //本机ip, 方便本机调试接口
-        server: '0.0.0.0'
-      }
+  module.exports.devServer = {
+    clientLogLevel: 'warning',
+    // 路由history模式bug解决
+    historyApiFallback: {
+      rewrites: [
+        { from: /.*/, to: path.posix.join('/', 'index.html') },
+      ],
     },
-    port: config.serve.port, // 配置监听端口，默认值 8080
-    dev: {
-      publicPath: config.publicPath
+    hot: true, //启用热更换模块
+    contentBase: false, // 提供静态文件, since we use CopyWebpackPlugin.
+    compress: true, // 对所有服务启用gzip压缩
+    host: internalIp.v4.sync(),  //本机ip, 方便本机调试接口
+    port: config.serve.port,  // 配置监听端口，默认值 8080
+    open: true, // dev-server在服务器启动后打开浏览器
+    // 出现编译器错误或警告时，在浏览器中显示全屏覆盖
+    overlay: {
+      warnings: false, //警告不显示
+      errors: true //错误显示
     },
-    // add: 用来给服务器的 koa 实例注入 middleware 增加功能
-    add: app => {
-      app.use(convert(history({
-        /*
-         url.parse会将 'name=liming&password=123'转换成 '{ name: "liming", password: "123" }'
-        */
-        index: url.parse(config.publicPath).pathname,
-
-        /*当处理带后缀名的请求时，比如 http://localhost:8080/bar.do ，connect-history-api-fallback 会认为它应该是一个实际存在的文件，就算找不到该文件，也不会 fallback 到 index.html，而是返回 404。但在 SPA 应用中这不是我们希望的。
-
-        幸好有一个配置选项 disableDotRule: true 可以禁用这个规则，使带后缀的文件当不存在时也能 fallback 到 index.html
-        */
-        disableDotRule: true,
-        htmlAcceptHeaders: ['text/html', 'application/xhtml+xml']  // 需要配合 disableDotRule 一起使用
-      })))
+    publicPath: config.publicPath, // 捆绑的文件将在此路径下的浏览器中可用
+    proxy: {}, // 代理，解决本地调试跨域问题
+    quiet: true, // necessary for FriendlyErrorsPlugin,
+    watchOptions: {
+      poll: false,  //https://webpack.js.org/configuration/dev-server/#devserverwatchoptions-
     }
   }
 }

@@ -1,3 +1,8 @@
+/*
+<备份说明> 当前版本用的是webpack-serve, 鉴于其已停止更新，改回webpack-dev-serve, 此文件为备份
+<备份时间> 2020-04-15
+*/
+
 // url: https://github.com/wallstreetcn/webpack-and-spa-guide
 const { resolve } = require('path')
 const webpack = require('webpack')
@@ -7,6 +12,7 @@ const history = require('connect-history-api-fallback')
 const convert = require('koa-connect')
 const url = require('url')
 const internalIp = require('internal-ip')
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 // 使用 WEBPACK_SERVE 环境变量检测当前是否是在 webpack-server 启动的开发环境中
 const dev = Boolean(process.env.WEBPACK_SERVE)
@@ -79,6 +85,15 @@ module.exports = {
     webpack 当遇到 import ... 时，会调用这里配置的 loader 对引用的文件进行编译
     */
     rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        //options: {
+        //   loaders: {
+        //     'less': [ 'style-loader', 'css-loader', 'less-loader']
+        //   }
+        // }
+      },
       /*
         使用 babel 编译 ES6 / ES7 / ES8 为 ES5 代码
         使用正则表达式匹配后缀名为 .js 的文件
@@ -125,6 +140,11 @@ module.exports = {
         字体文件交给指定的 loader 打包，类似上面的 html-loader, 用什么 loader 同样在 loaders 对象中定义，等会下面就会看到。
         */
         use: ['style-loader', 'css-loader', 'postcss-loader']
+      },
+
+      {
+        test: /\.less$/,
+        use: [ 'style-loader', 'css-loader', 'less-loader']
       },
 
       {
@@ -182,7 +202,7 @@ module.exports = {
   而 plugin, 关注的不是文件的格式，而是在编译的各个阶段，会触发不同的事件，让你可以干预每个编译阶段。
   */
   plugins: [
-    // 环境变量
+    // 环境变量, 可以在src内引用
     new webpack.DefinePlugin({
       DEBUG: dev,
       VERSION: JSON.stringify(pkgInfo.version),
@@ -220,13 +240,18 @@ module.exports = {
       https://github.com/jantimon/html-webpack-plugin/issues/870
       */
       chunksSortMode: 'none'
-    })
+    }),
+
+    new VueLoaderPlugin()
   ],
 
   resolve: {
+    // 这些后缀可以省略
+    extensions: ['.js', '.vue', '.json'],
     //路径别名
     alias: {
-      '~': resolve(__dirname, 'src')
+      'vue$': 'vue/dist/vue.esm.js',
+      '@': resolve(__dirname, 'src')
     }
   },
 

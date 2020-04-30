@@ -5,6 +5,7 @@
       <icon-svg name="arrow-right" />
       <icon-svg name="check" />
       <icon-svg name="info" />
+      
 
       <!-- <el-alert
             title="错误提示的文案"
@@ -24,7 +25,11 @@ export default {
   methods: {
 
   },
-  created() {}
+  created() {
+    console.log(DEBUG);
+    console.log(VERSION);
+    console.log(CONFIG);
+  }
 };
 </script>
 

@@ -1,4 +1,5 @@
 module.exports = {
+  // 运行时的config
   runtimeConfig: {
     experimentalFeatures: {
       foo: true,
